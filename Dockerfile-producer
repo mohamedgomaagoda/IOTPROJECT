@@ -1,0 +1,17 @@
+# Use a base Python image
+FROM python:3.8-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the requirements and install dependencies
+COPY requirements.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the producer script and CSV file
+COPY producer.py producer.py
+COPY iot_telemetry_data.csv iot_telemetry_data.csv
+
+# Run the producer script
+CMD ["python", "producer.py"]
+
